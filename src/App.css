@@ -1,0 +1,55 @@
+.AppBody{
+  width: 100%;
+ }
+ @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Unica+One&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+
+.AppBody h1{
+  display: block;
+  width: 46%;
+  padding-top: 50px;
+  margin:auto 27%;
+  text-align: center;
+  font-family: 'Berkshire Swash',cursive;
+  color:#f70084;
+
+}
+.AppBody i{
+  font-size: 50px;
+  border-radius: 50%;
+  padding:23px 20px;
+  background-color:#f70084;
+  color:white;
+}
+.logout{
+  color:white;
+  background-color: #f70084;
+  border:none;
+  padding: 5px;
+  border-radius: 5px;
+}
+.iconandnames{
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  justify-items:center;
+  align-items:center;
+}
+
+
+@media only screen and (max-width:600px){
+
+  .AppBody h1{
+    display: none;
+  }
+  .iconandnames{
+
+    justify-self: center;
+    align-self: center;
+  }
+  
+}

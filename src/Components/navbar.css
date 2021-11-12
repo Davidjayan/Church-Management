@@ -1,0 +1,19 @@
+.stud-att-body ul{
+    display: flex;
+    justify-content: center;
+}
+
+.stud-att-body ul li{
+    list-style: none;
+    display:inline-flex ;
+    padding:10px;
+    
+    
+}
+.stud-att-body a{
+    text-decoration: none;
+    color:black;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow:1px 1px 5px #ccc;
+}
