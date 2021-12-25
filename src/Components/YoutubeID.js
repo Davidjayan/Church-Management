@@ -8,7 +8,7 @@ const YoutubeID = () =>{
     let id = links.map((k)=>k.id);
 
     const submit = () =>{
-            fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/youtubeid.php",{
+            fetch(`${url}/jehovanissi/backend/apis/youtubeid.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 

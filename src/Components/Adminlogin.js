@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import '../assets/adminlogin.css';
+import { url } from '../Constants';
 
 
 const Adminlogin=()=>{
@@ -16,7 +17,7 @@ const Adminlogin=()=>{
 
     const Registration=()=> {
 
-      fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/adminlogin.php",{
+      fetch(`${url}/jehovanissi/backend/apis/adminlogin.php`,{
         method:'POST',
         headers:{
           'Accept' : 'application/json, text/plain,*/*',

@@ -29,7 +29,7 @@ const Inputchurchattendance = () =>{
 
 
     useEffect (()=>{
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/searchname.php",{
+        fetch(`${url}/jehovanissi/backend/apis/searchname.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 
@@ -64,7 +64,7 @@ const Inputchurchattendance = () =>{
        
        const submit = () =>{
         if(churchattendance){
-            fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/church_attendance.php",{
+            fetch(`${url}/jehovanissi/backend/apis/church_attendance.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import '../assets/dataentry.css';
+import { url } from "../Constants";
 
 const Dataentry=()=>{
     const [name,        setName         ]=useState('');
@@ -273,7 +274,7 @@ const Dataentry=()=>{
             let Android     = android;     
             
 
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/member_details.php",{
+        fetch(`${url}/jehovanissi/backend/apis/member_details.php`,{
         method:'POST',
         headers:{
           'Accept' : 'application/json', 
@@ -315,7 +316,7 @@ const Dataentry=()=>{
     }
 
     const searchfamilyhead = () =>{
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/searchfamilyhead.php",{
+        fetch(`${url}/jehovanissi/backend/apis/searchfamilyhead.php`,{
         method:'POST',
         headers:{
           'Accept' : 'application/json', 

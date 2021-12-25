@@ -64,7 +64,7 @@ const Getstudentattendance = () =>{
     
     const submit1 = () =>{
         if(date){
-            fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/searchbydate.php",{
+            fetch(`${url}/jehovanissi/backend/apis/searchbydate.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 
@@ -103,7 +103,7 @@ const Getstudentattendance = () =>{
 
     const submit = () =>{
         if(fromdate&&todate&&name){
-            fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/searchbystudentname.php",{
+            fetch(`${url}/jehovanissi/backend/apis/searchbystudentname.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 
@@ -142,7 +142,7 @@ const Getstudentattendance = () =>{
     
 
     const searchapi = () =>{
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/searchstudentname.php",{
+        fetch(`${url}/jehovanissi/backend/apis/searchstudentname.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 

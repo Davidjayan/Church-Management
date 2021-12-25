@@ -12,7 +12,7 @@ const Editaccounting=()=>{
 
 
     const sumbit=()=>{
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/accounting-fetch.php",{
+        fetch(`${url}/jehovanissi/backend/apis/accounting-fetch.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 
@@ -45,7 +45,7 @@ const Editaccounting=()=>{
           });
     }
     const submit2=()=>{
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/accounting-fetch-denominations.php",{
+        fetch(`${url}/jehovanissi/backend/apis/accounting-fetch-denominations.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 
@@ -110,7 +110,7 @@ const Editaccounting=()=>{
 
         const results = !searchterm?names:names.filter(person=>person.toLowerCase().includes(searchterm.toLocaleLowerCase()));
         const searchapi = () =>{
-            fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/searchname.php",{
+            fetch(`${url}/jehovanissi/backend/apis/searchname.php`,{
                 method:'POST',
                 headers:{
                   'Accept' : 'application/json', 
@@ -129,7 +129,7 @@ const Editaccounting=()=>{
     const confirm =() =>{
         
 
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/edit-accounting.php",{
+        fetch(`${url}/jehovanissi/backend/apis/edit-accounting.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 
@@ -177,7 +177,7 @@ const Editaccounting=()=>{
 
         }
         const deleteRow=(delName,delType)=>{
-            fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/accounting-delete-row.php",{
+            fetch(`${url}/jehovanissi/backend/apis/accounting-delete-row.php`,{
                 method:'POST',
                 headers:{
                   'Accept' : 'application/json', 
@@ -198,7 +198,7 @@ const Editaccounting=()=>{
               });
         } 
         const addnew=()=>{
-            fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/accounting-add-new.php",{
+            fetch(`${url}/jehovanissi/backend/apis/accounting-add-new.php`,{
                 method:'POST',
                 headers:{
                   'Accept' : 'application/json', 

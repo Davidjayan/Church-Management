@@ -63,7 +63,7 @@ const Getchurchattendance = () =>{
     
     const submit1 = () =>{
         if(date.length!==0){
-            fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/searchchurchattbydate.php",{
+            fetch(`${url}/jehovanissi/backend/apis/searchchurchattbydate.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 
@@ -102,7 +102,7 @@ const Getchurchattendance = () =>{
 
     const submit = () =>{
         if(fromdate&&todate&&name){
-            fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/searchchurchattbyname.php",{
+            fetch(`${url}/jehovanissi/backend/apis/searchchurchattbyname.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 
@@ -142,7 +142,7 @@ const Getchurchattendance = () =>{
 
    
     const searchapi = () =>{
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/searchname.php",{
+        fetch(`${url}/jehovanissi/backend/apis/searchname.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 

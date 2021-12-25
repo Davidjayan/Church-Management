@@ -9,7 +9,7 @@ const Newstudententry = () =>{
 
     const submit = () =>{
         if(newname){
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/insertstudentname.php",{
+        fetch(`${url}/jehovanissi/backend/apis/insertstudentname.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 
@@ -37,7 +37,7 @@ const Newstudententry = () =>{
             }
     }   
     const searchapi = () =>{
-      fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/searchname.php",{
+      fetch(`${url}/jehovanissi/backend/apis/searchname.php`,{
           method:'POST',
           headers:{
             'Accept' : 'application/json', 

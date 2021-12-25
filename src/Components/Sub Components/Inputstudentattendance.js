@@ -27,7 +27,7 @@ const Inputstudentattendance = () =>{
 
     const submit = () =>{
         if(studentattendance){
-            fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/student_attendance.php",{
+            fetch(`${url}/jehovanissi/backend/apis/student_attendance.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 
@@ -58,7 +58,7 @@ const Inputstudentattendance = () =>{
     
 
     useEffect(() => {
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/getstudentname.php")
+        fetch(`${url}/jehovanissi/backend/apis/getstudentname.php`)
           .then(res => res.json())
           .then(
             (result) => {

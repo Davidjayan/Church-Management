@@ -1,5 +1,6 @@
 import React, {  useState } from "react";
 import '../assets/accounting.css';
+import { url } from "../Constants";
 
 
 
@@ -82,7 +83,7 @@ const Accounting=()=>{
 
     const submit = () =>{
         if(name[0]&&dateofofferings&&(amount!==0)&&churchOffering>=0){
-            fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/accounting.php",{
+            fetch(`http://${url}/jehovanissi/backend/apis/accounting.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 
@@ -135,7 +136,7 @@ const Accounting=()=>{
     }
     }
     const searchapi = () =>{
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/searchname.php",{
+        fetch(`${url}/jehovanissi/backend/apis/searchname.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 

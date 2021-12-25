@@ -55,7 +55,7 @@ const Fetchaccountingdetails = () =>{
 
     const submitbyname=()=>{
         if(fromdate.length!==0&&todate.length!==0){
-            fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/accounting-submitbyname.php",{
+            fetch(`${url}/jehovanissi/backend/apis/accounting-submitbyname.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 
@@ -94,7 +94,7 @@ const Fetchaccountingdetails = () =>{
 
     const submitbydate=()=>{
         if(fromdate.length!==0&&todate.length!==0){
-            fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/accounting-submitbydate.php",{
+            fetch(`${url}/jehovanissi/backend/apis/accounting-submitbydate.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 
@@ -136,7 +136,7 @@ const Fetchaccountingdetails = () =>{
 
 
     const searchapi = () =>{
-      fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/searchname.php",{
+      fetch(`${url}/jehovanissi/backend/apis/searchname.php`,{
           method:'POST',
           headers:{
             'Accept' : 'application/json', 
@@ -154,7 +154,7 @@ const Fetchaccountingdetails = () =>{
 
     const submitbydateglobal=()=>{
         if(fromdate.length!==0&&todate.length!==0){
-            fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/accounting-submitchurchofferings-totals.php",{
+            fetch(`${url}/jehovanissi/backend/apis/accounting-submitchurchofferings-totals.php`,{
             method:'POST',
             headers:{
               'Accept' : 'application/json', 

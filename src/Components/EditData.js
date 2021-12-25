@@ -9,7 +9,7 @@ const EditData = () =>{
 
 
     useEffect(()=>{
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/data-fetch.php",{
+        fetch(`${url}/jehovanissi/backend/apis/data-fetch.php`,{
         method:'POST',
         headers:{
           'Accept' : 'application/json', 
@@ -33,7 +33,7 @@ const EditData = () =>{
 
 
     const searchfamilyhead = () =>{
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/searchfamilyhead.php",{
+        fetch(`${url}/jehovanissi/backend/apis/searchfamilyhead.php`,{
         method:'POST',
         headers:{
           'Accept' : 'application/json', 
@@ -50,7 +50,7 @@ const EditData = () =>{
           });
     }
     const searchaddress= () =>{
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/searchaddress.php",{
+        fetch(`${url}/jehovanissi/backend/apis/searchaddress.php`,{
         method:'POST',
         headers:{
           'Accept' : 'application/json', 
@@ -73,7 +73,7 @@ const EditData = () =>{
 
 
     const makechanges = ()=>{
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/data-edit.php",{
+        fetch(`${url}/jehovanissi/backend/apis/data-edit.php`,{
         method:'POST',
         headers:{
           'Accept' : 'application/json', 
@@ -95,7 +95,7 @@ const EditData = () =>{
     const deleteRecord = ()=>{
        
            
-        fetch("http://backendjnag.rf.gd/jehovanissi/backend/apis/data-delete.php",{
+        fetch(`${url}/jehovanissi/backend/apis/data-delete.php`,{
         method:'POST',
         headers:{
           'Accept' : 'application/json', 
