@@ -1,4 +1,5 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
+import { url } from "../../Constants";
 
 const Newstudententry = () =>{
     const [newname,setnewname]=useState('');

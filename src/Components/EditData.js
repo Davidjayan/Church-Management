@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../assets/editdataentry.css';
+import { url } from '../Constants';
 
 const EditData = () =>{
         const [data,setdata]=useState([]);
