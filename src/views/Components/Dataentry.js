@@ -105,21 +105,21 @@ const Dataentry = () => {
             severity:result['status']==1?"success":"error",
             message:String(result['message'])
           });
-          // setData({
-          //   name: '',
-          //   dob: new Date(),
-          //   gender: 'male',
-          //   weddingdate: '',
-          //   emailid: '',
-          //   mobile: '',
-          //   address: '',
-          //   familyhead: '',
-          //   familyid: '',
-          //   selfid: '',
-          //   android: false,
-          //   baptized: false,
-          //   married: false,
-          // });
+          setData({
+            name: '',
+            dob: new Date(),
+            gender: 'male',
+            weddingdate: '',
+            emailid: '',
+            mobile: '',
+            address: '',
+            familyhead: '',
+            familyid: '',
+            selfid: '',
+            android: false,
+            baptized: false,
+            married: false,
+          });
         })
         .catch((error) => {
           console.error(error)
