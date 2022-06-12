@@ -8,11 +8,10 @@ import { DataEntryForms } from './DataEntryForm'
 
 
 const Dataentry = () => {
-  const [familyheads, setFamilyheads] = useState([])
-  const [validity, setvalidity] = useState(true);
+  const [familyheads, setFamilyheads] = useState([]);
   const [notify, setNotify] = useState({ isOpen: false, message: '', variant: 'filled', severity: 'error' });
 
-  
+
   const [data, setData] = useState({
     name: '',
     dob: '',
@@ -61,7 +60,7 @@ const Dataentry = () => {
   
 
   const addrecords = () => {
-    if (validity) {
+    if (validated) {
       let Familyid = data.familyid
       let Selfid = data.selfid
       let Name = data.name
