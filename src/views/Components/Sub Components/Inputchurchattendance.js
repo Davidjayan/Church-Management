@@ -61,7 +61,6 @@ const Inputchurchattendance = () => {
 
     setchurchattendance(obj);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [namelist]);
 
   const submit = () => {

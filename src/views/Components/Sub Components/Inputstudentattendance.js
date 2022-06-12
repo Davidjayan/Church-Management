@@ -105,7 +105,6 @@ const Inputstudentattendance = () => {
 
     setstudentattendance(obj);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [studentnames]);
 
 
