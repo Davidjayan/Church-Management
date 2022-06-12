@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { url } from '../Constants'
-import { Grid, Button, FormControlLabel, RadioGroup, Radio, Autocomplete, formLabelClasses } from '@mui/material'
-import { CAlert, CButton, CCol, CForm, CFormFeedback, CFormInput, CFormLabel, CFormSwitch, CFormTextarea } from '@coreui/react'
+import { CButton, CCol, CForm, CFormFeedback, CFormInput, CFormLabel, CFormTextarea } from '@coreui/react'
+import { FormControlLabel, Radio, RadioGroup } from '@mui/material'
 import { AlertMessage } from './Support/AlertMessage'
-import { AppFooter } from 'src/components'
-import { DataEntryForm } from './DataEntryForm'
 
 
 

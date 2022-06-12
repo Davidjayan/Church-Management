@@ -1,9 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { url } from '../Constants'
-import { Grid, Button, FormControlLabel, RadioGroup, Radio, Autocomplete, formLabelClasses } from '@mui/material'
-import { CAlert, CButton, CCol, CForm, CFormFeedback, CFormInput, CFormLabel, CFormSwitch, CFormTextarea } from '@coreui/react'
-import { AlertMessage } from './Support/AlertMessage'
-import { AppFooter } from 'src/components'
 import { DataEntryForms } from './DataEntryForm'
 
 
