@@ -12,6 +12,7 @@ const Dataentry = () => {
   const [validity, setvalidity] = useState(true);
   const [notify, setNotify] = useState({ isOpen: false, message: '', variant: 'filled', severity: 'error' });
 
+  
   const [data, setData] = useState({
     name: '',
     dob: '',
