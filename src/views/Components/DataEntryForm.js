@@ -8,8 +8,9 @@ export const DataEntryForms = (props)=>{
     const data = props.data;
     const familyheads = props.familyheads;
     return(
-        <CForm direction={'column'} alignItems={'center'} justifyItems={'stretch'} container item validated={props.validated}>
+        <CForm direction={'column'} alignItems={'center'} justifyItems={'stretch'} container item validated={props.validated} >
       <AlertMessage
+      closeFunc={window.location.reload}
         notify={props.notify}
         setNotify={props.setNotify}
       />

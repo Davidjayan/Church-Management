@@ -45,9 +45,10 @@ const Dataentry = () => {
     const form = event.currentTarget
 
     if (form.checkValidity() == false) {
-      event.preventDefault()
-
+      // event.preventDefault()
+      
       event.stopPropagation()
+      
     }
     else {
       setValidated(true);
@@ -120,6 +121,7 @@ const Dataentry = () => {
             baptized: false,
             married: false,
           });
+          
         })
         .catch((error) => {
           console.error(error)
@@ -135,6 +137,7 @@ const Dataentry = () => {
 
   useEffect(()=>{
     addrecords();
+    setValidated(false);
   },[validated])
 
   const searchfamilyhead = () => {

@@ -23,7 +23,7 @@ export const AlertMessage=(props)=>{
               color="inherit"
               size="large"
               onClick={() => {
-                setNotify({...notify,isOpen:false})
+                setNotify({...notify,isOpen:false});
               }}
             >
               <CloseIcon fontSize="inherit" />
