@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react'
 import { url } from '../Constants'
 import { DataEntryForms } from './DataEntryForm'
@@ -7,6 +8,7 @@ const Dataentry = () => {
   const [familyheads, setFamilyheads] = useState([]);
   const [notify, setNotify] = useState({ isOpen: false, message: '', variant: 'filled', severity: 'error' });
   const [validity,setValidity] = useState(true);
+  const [age,setAge] = useState();
 
 
   const [data, setData] = useState({
@@ -25,12 +27,11 @@ const Dataentry = () => {
     married: false,
   })
 
-  let age
   useEffect(() => {
 
 
     let yearDifference = 31536000000;
-    age = parseInt(parseInt((new Date().getTime()-new Date(data.dob).getTime())/yearDifference).toString().replace("-",""));
+    setAge(String(parseInt((new Date().getTime()-new Date(data.dob).getTime())/yearDifference).toString().replace("-","")));
 
 
     console.log(age);
@@ -38,9 +39,9 @@ const Dataentry = () => {
   
 
 
-  const [validated, setValidated] = useState(false)
+  const [validated, setValidated] = useState();
 
-  const handleSubmit = (event) => {
+  const handleSubmit =(event) =>{
     const form = event.currentTarget
 
     if (form.checkValidity() == false) {
@@ -49,20 +50,20 @@ const Dataentry = () => {
       event.stopPropagation()
     }
     else {
-      setValidated(true)
-      addrecords();
+      setValidated(true);
     }
-
   }
+
+  
   
 
   const addrecords = () => {
-    if (validity) {
+    if (validated) {
       let Familyid = data.familyid
       let Selfid = data.selfid
       let Name = data.name
       let Dob = data.dob
-      let Age = age
+      let Age = age;
       let Gender = data.gender
       let Married = data.married==false?0:data.married;
       let Weddingdate = data.weddingdate
@@ -104,21 +105,21 @@ const Dataentry = () => {
             severity:result['status']==1?"success":"error",
             message:String(result['message'])
           });
-          setData({
-            name: '',
-            dob: new Date(),
-            gender: 'male',
-            weddingdate: '',
-            emailid: '',
-            mobile: '',
-            address: '',
-            familyhead: '',
-            familyid: '',
-            selfid: '',
-            android: false,
-            baptized: false,
-            married: false,
-          });
+          // setData({
+          //   name: '',
+          //   dob: new Date(),
+          //   gender: 'male',
+          //   weddingdate: '',
+          //   emailid: '',
+          //   mobile: '',
+          //   address: '',
+          //   familyhead: '',
+          //   familyid: '',
+          //   selfid: '',
+          //   android: false,
+          //   baptized: false,
+          //   married: false,
+          // });
         })
         .catch((error) => {
           console.error(error)
@@ -131,6 +132,10 @@ const Dataentry = () => {
       })
     }
   }
+
+  useEffect(()=>{
+    addrecords();
+  },[validated])
 
   const searchfamilyhead = () => {
     fetch(`${url}/searchfamilyhead.php`, {
