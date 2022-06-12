@@ -159,7 +159,7 @@ const Dataentry = () => {
   }
   useEffect(() => {
     searchfamilyhead()
-  }, [])
+  }, [validated])
 
   return (
     <DataEntryForms
