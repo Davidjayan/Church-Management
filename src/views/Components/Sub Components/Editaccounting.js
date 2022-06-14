@@ -14,28 +14,28 @@ const Editaccounting = (props) => {
     const [tempname, settempname] = useState('');
     const [temptype, settemptype] = useState('');
     const [tempamount, settempamount] = useState(0);
-    const [dateValue, setdateValue] = useState('10/18/2021');
+    const [dateValue, setdateValue] = useState();
     const [dateset, isDateset] = useState(false);
     const [report, setOfferingReport] = useState([]);
     const [denominationsAndTotals, setDenominationsandTotals] = useState(
         [{
-            "Date": "2021-10-18",
-            "ChurchOffering": "1680",
-            "TitheTotal": "720",
+            "Date": "",
+            "ChurchOffering": "0",
+            "TitheTotal": "0",
             "OfferingTotal": "0",
             "SpecialOfferingTotal": "0",
             "BaptismofferingTotal": "0",
             "BirthdayofferingTotal": "0",
-            "WeddingofferingTotal": "300",
+            "WeddingofferingTotal": "0",
             "ChilddedicationofferingTotal": "0",
             "CommittedofferingTotal": "0",
-            "MissionaryTotal": "500",
+            "MissionaryTotal": "0",
             "BuildingFundTotal": "0",
-            "GrandTotal": "3200",
-            "TwoThousands": "1",
-            "FiveHundreds": "1",
-            "TwoHundreds": "3",
-            "Hundreds": "1",
+            "GrandTotal": "0",
+            "TwoThousands": "0",
+            "FiveHundreds": "0",
+            "TwoHundreds": "0",
+            "Hundreds": "0",
             "Fifty": "0",
             "Twenty": "0",
             "Ten": "0",
@@ -74,56 +74,108 @@ const Editaccounting = (props) => {
         { "name": "Two", "value": 2 },
         { "name": "One", "value": 1 }
     ]
-    const { get, post, response, loading, error } = useFetch(url)
+    // const { get, post, response, loading, error } = useFetch(url)
 
-    const fetchOffering = async ()=>{
-        const newTodo = await post('/accounting-fetch.php', { date: dateValue });
-        let arr = newTodo.message[0];
-       
-        
-    }
+    // const fetchOffering = async ()=>{
+    //     const result = await post('/accounting-fetch.php', { date: dateValue });
+    //     let arr = result.message[0];
 
-    
+
+    // }
+
+
 
 
 
 
 
     const fetchOfferingAndDenominationsByDate = async () => {
-        setLoading(true);
-        fetch(`${url}/accounting-fetch.php`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
+        if (dateValue) {
+            setLoading(true);
+            setDenominationsandTotals(
+                [{
+                    "Date": dateValue,
+                    "ChurchOffering": "0",
+                    "TitheTotal": "0",
+                    "OfferingTotal": "0",
+                    "SpecialOfferingTotal": "0",
+                    "BaptismofferingTotal": "0",
+                    "BirthdayofferingTotal": "0",
+                    "WeddingofferingTotal": "0",
+                    "ChilddedicationofferingTotal": "0",
+                    "CommittedofferingTotal": "0",
+                    "MissionaryTotal": "0",
+                    "BuildingFundTotal": "0",
+                    "GrandTotal": "0",
+                    "TwoThousands": "0",
+                    "FiveHundreds": "0",
+                    "TwoHundreds": "0",
+                    "Hundreds": "0",
+                    "Fifty": "0",
+                    "Twenty": "0",
+                    "Ten": "0",
+                    "Five": "0",
+                    "Two": "0",
+                    "One": "0"
+                }]
+            );
+            setOfferingReport([]);
+            fetch(`${url}/accounting-fetch.php`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
 
-            },
-            body: JSON.stringify({
-                date: dateValue
+                },
+                body: JSON.stringify({
+                    date: dateValue
+                })
             })
-        })
-            .then(res => res.json())
-            .then((result) => {
-                setLoading(false);
-                if (result.status !== 0) {
-                    setOfferingReport(result.message[0]);
-                    setDenominationsandTotals([result.message[1]]);
-
+                .then(res => res.json())
+                .then((result) => {
+                    setLoading(false);
                     isDateset(true);
+                    if (result.status !== 0) {
+                        let mess = result['message'][0];
+                        if (result['message'][1]['Date'] || mess.length !== 0) {
+                            setDenominationsandTotals([result['message'][1]]);
+                            for (let i = 0; i < mess.length; i++) {
+                                mess[i].oldtype = mess[i]['Type'];
+                            }
+                            setOfferingReport(mess);
 
-                }
-                else {
-                    setNotify({
-                        ...notify,
-                        isOpen: true,
-                        message: result.message
-                    })
-                }
+                            isDateset(true);
+                        }
+                        else {
+
+                            setNotify({
+                                ...notify,
+                                isOpen: true,
+                                severity:'error',
+                                message: "No records found"
+                            })
+                        }
+                    }
+                    else {
+                        setNotify({
+                            ...notify,
+                            isOpen: true,
+                            message: result.message
+                        })
+                    }
 
 
-            }).catch((error) => {
-                console.error(error);
+                }).catch((error) => {
+                    console.error(error);
+                })
+        }
+        else {
+            setNotify({
+                ...notify,
+                isOpen: true,
+                message: "Please fill all the required input and try again"
             })
+        }
     }
 
     const setDeno = async (value, denoName) => {
@@ -204,7 +256,9 @@ const Editaccounting = (props) => {
     }
     useEffect(() => {
         searchapi();
-    }, [1])
+    }, [])
+
+
     const confirm = () => {
         setLoading(true);
 
@@ -284,7 +338,6 @@ const Editaccounting = (props) => {
                 "date": dateValue,
                 "Type": temptype,
                 "Amount": tempamount
-
             })
         })
             .then(res => res.json())
@@ -301,6 +354,8 @@ const Editaccounting = (props) => {
                         Name: tempname,
                         Type: temptype,
                         Amount: tempamount,
+                        Date:dateValue,
+                        oldtype:temptype
                     }]);
                 }
             })
@@ -328,8 +383,8 @@ const Editaccounting = (props) => {
                     value={dateValue}
                     label='Date'
                 />
-                <Button className="btn2" onClick={() => {   
-                    fetchOffering()
+                <Button className="btn2" onClick={() => {
+                    fetchOfferingAndDenominationsByDate()
                 }} >Submit</Button>
             </Grid>
             <Grid style={{ display: dateset ? "block" : "none" }} >
@@ -576,7 +631,7 @@ const Editaccounting = (props) => {
 
                                             // setDenominationsandTotals([...denominationsAndTotals,{GrandTotal:n}]);
                                         }}
-                                    />
+                                    />  
                                     <Typography>
                                         ={val.value * (isNaN(parseFloat(denominationsAndTotals[0][name])) ? 0 : parseFloat(denominationsAndTotals[0][name]))}
                                     </Typography>

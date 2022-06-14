@@ -3,15 +3,34 @@ import { url } from '../Constants';
 import { Button, Grid, MenuItem, Select, TextField, Typography } from '@mui/material';
 import { CAlert, CFormSelect, CFormText, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from '@coreui/react';
 import { AlertMessage } from './Support/AlertMessage';
+import { DataEntryForms } from './DataEntryForm';
 
 const EditData = () => {
     const [data, setdata] = useState([]);
     const [pageno, setPageno] = useState(0);
     const [pages, setPages] = useState([]);
+    const [editdata, seteditdata] = useState();
     const items = 10;
     const [familyheads, setFamilyheads] = useState([]);
     const [addresses, setAddresses] = useState([]);
 
+
+
+    const [validated, setValidated] = useState(false);
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget
+
+        if (form.checkValidity() == false) {
+            // event.preventDefault()
+
+            event.stopPropagation()
+
+        }
+        else {
+            setValidated(true);
+        }
+    }
 
     useEffect(() => {
         fetch(`${url}/member-data-count.php`, {
@@ -31,7 +50,6 @@ const EditData = () => {
                     }
                     setPages(pageList);
                     pageList = [];
-                    console.log(pageList);
                 }
             })
     }, [])
@@ -47,13 +65,12 @@ const EditData = () => {
         }).then((res) => res.json())
             .then((result) => {
                 if (result['status'] == 1) {
-                    setdata(result['message']);
-                    // result['message'].map((x, key) => {
-                    //     setdata((currentPeople) => currentPeople.map((p, l) => l === key ? {
-                    //         ...p,
-                    //         InitialSID: p.SelfID,
-                    //     } : p));
-                    // })
+                    let mess = result['message'];
+                    for (let i = 0; i < mess.length; i++) {
+                       mess[i].InitialSID = mess[i]['SelfID'];                        
+                    }
+                    console.log(mess);
+                    setdata(mess);
                 }
                 else {
                     setNotify({
@@ -67,7 +84,14 @@ const EditData = () => {
             .catch((error) => {
                 console.log(error);
             })
-    }, [pageno]);
+    }, [pageno,validated]);
+
+
+    useEffect(()=>{
+        searchfamilyhead();
+        makechanges();
+    },[validated])
+
 
 
     const searchfamilyhead = () => {
@@ -103,35 +127,34 @@ const EditData = () => {
                 console.error(error);
             });
     }
-
-    const [display2, setdisplay2] = useState("none");
-    const [row, setrow] = useState(0);
-    const [focus, isFocused] = useState({ 'familyid': data[row] !== undefined ? data[row]['FamilyID'] !== '' ? true : false : true, 'selfid': data[row] !== undefined ? data[row]['SelfID'] !== '' ? true : false : true, 'name': data[row] !== undefined ? data[row]['Name'] !== '' ? true : false : true, 'email': data[row] !== undefined ? data[row]['EmailID'] !== '' ? true : false : true, 'mobile': data[row] !== undefined ? data[row]['Mobile'] !== '' ? true : false : true, 'address': data[row] !== undefined ? data[row]['Address'] !== '' ? true : false : true, 'familyhead': data[row] !== undefined ? data[row]['FamilyHead'] !== '' ? true : false : true })
     const [notify, setNotify] = useState({ isOpen: false, message: '', variant: 'filled', severity: 'error' });
 
     const makechanges = () => {
-        fetch(`${url}/data-edit.php`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                data: data[row]
-            })
-
-        }).then((res) => res.json())
-            .then((result) => {
-                setNotify({
-                    ...notify,
-                    isOpen: true,
-                    message: result
+        if(editdata!==undefined){
+            fetch(`${url}/data-edit.php`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: editdata
                 })
-                window.location.reload();
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+    
+            }).then((res) => res.json())
+                .then((result) => {
+                    setNotify({
+                        ...notify,
+                        isOpen: true,
+                        severity:result['status']==1?'success':'error',
+                        message: result['message']
+                    });
+                    setValidated(false);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
     }
     const deleteRecord = () => {
 
@@ -143,7 +166,7 @@ const EditData = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                selfid: data[row]['SelfID']
+                selfid: editdata['SelfID']
             })
 
         }).then((res) => res.json())
@@ -170,10 +193,7 @@ const EditData = () => {
     const [value, setvalue] = useState();
     return (
         <Grid className="editform" >
-            <AlertMessage
-                notify={notify}
-                setNotify={setNotify}
-            />
+            
             {/* <Grid style={{ display: 'flex', flexDirection: 'column' }}>
                 <Typograph >
                     Search by
@@ -243,16 +263,20 @@ const EditData = () => {
                     })}
                 </datalist>
             </Grid> */}
+            {editdata != undefined ?
+                <DataEntryForms
+                    familyheads={familyheads}
+                    data={editdata}
+                    notify={notify}
+                    setNotify={setNotify}
+                    setData={seteditdata}
+                    validated={validated}
+                    handleSubmit={handleSubmit}
+                />
+                // console.log(editdata)
+                : ''
 
-            {/* <DataEntryForms
-                familyheads={familyheads}
-                data={data}
-                notify={notify}
-                setNotify={setNotify}
-                setData={setData}
-                validated={validated}
-                handleSubmit={handleSubmit}
-            /> */}
+            }
 
             <Grid direction={"column"} item>
                 <Select
@@ -285,8 +309,7 @@ const EditData = () => {
                                 <CTableDataCell>{k.FamilyHead}</CTableDataCell>
                                 <CTableDataCell><Button
                                     onClick={() => {
-                                        setrow(index);
-                                        setdisplay2("block");
+                                        seteditdata(data[index]);
                                     }}
                                 >Edit</Button></CTableDataCell>
 

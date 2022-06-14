@@ -15,7 +15,6 @@ const Accounting = (props) => {
   const [names, setnames] = useState([]);
   const [notify, setNotify] = useState({ isOpen: false, message: '', variant: 'filled', severity: 'error' });
 
-  const [searchterm, setsearchterm] = useState();
 
   const arrOfferingTypes = [
     { "name": "Select", "value": "" },
@@ -31,7 +30,6 @@ const Accounting = (props) => {
     { "name": "Building Fund", "value": "Building Fund" }
   ]
 
-  const results = !searchterm ? names : names.filter(person => person.toLowerCase().includes(searchterm.toLocaleLowerCase()));
 
   const [dateofofferings, setdateofofferings] = useState();
 
@@ -160,8 +158,8 @@ const Accounting = (props) => {
           setLoading(false);
           setNotify({
             isOpen: true,
-            message: result,
-            severity: 'error',
+            message: result['message'],
+            severity:result['status']==1?'success':'error',
             variant: 'filled'
           })
 
@@ -203,7 +201,8 @@ const Accounting = (props) => {
   }
   useEffect(() => {
     searchapi();
-  }, [1])
+  }, [])
+
 
 
   return (
@@ -222,39 +221,31 @@ const Accounting = (props) => {
           <Table
             size="small"
           >
-            {people.map((p) => {
+            {people.map((p,index) => {
               return (
                 <Grid key={p.id}>
                   <TableRow>
                     <TableCell>
                       <Autocomplete
-                        options={results}
+                        options={names}
                         fullWidth={false}
                         style={{ width: 200 }}
+                        onChange={(val,event) => {
+                          let str = event;
+                          setPeople(...[people],people[index].Name = str);
+                          console.log(p.Name);
+                        }}
                         renderInput={params =>
                           <TextField
                             {...params}
                             margin="dense"
+                            ref={params.InputProps.ref}
                             size="small"
                             placeholder="Enter Name"
-                            
+                            value={p.Name}
                           />
                         }
-                        onChange={(e,event) => {
-                          const str = event.target.value.split(' ');
-                          for (let i = 0; i < str.length; i++) {
-
-                            str[i] = str[i].charAt(0).toUpperCase() + str[i].substring(1);
-                          }
-
-                          const Name = str.join(' ');
-                          setsearchterm(Name);
-                          setPeople((currentPeople) => currentPeople.map(x => x.id === p.id ? {
-                            ...x,
-                            Name
-                          } : x));
-                        }}
-                        value={p.Name}
+                        
                       />
                     </TableCell>
                     <TableCell>

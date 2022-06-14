@@ -21,16 +21,16 @@ export const DataEntryForms = (props)=>{
         <CFormInput
           style={{ width: 300, marginRight: 15 }}
           name="familyid"
-          value={data.familyid}
+          value={data.FamilyID}
           margin="dense"
           variant="outlined"
           onChange={(event) => {
-            props.setData({ ...data, familyid: event.target.value.toUpperCase() })
+            props.setData({ ...data, FamilyID: event.target.value.toUpperCase() })
           }}
           placeholder="Family ID"
           label="Family ID"
           required
-          invalid={data.familyid ? false : true}
+          invalid={data.FamilyID ? false : true}
         />
         <CFormFeedback
           invalid
@@ -43,15 +43,15 @@ export const DataEntryForms = (props)=>{
         <CFormInput
           name="selfid"
           style={{ width: 300, marginRight: 15 }}
-          value={data.selfid}
+          value={data.SelfID}
           margin="dense"
           variant="outlined"
-          onFocus={() => props.setData({ ...data, selfid: data.familyid.slice(3) })}
+          onFocus={() => props.setData({ ...data, SelfID: data.FamilyID.slice(3) })}
           placeholder="Self ID"
           label="Self ID"
           required
           readOnly
-          invalid={data.selfid ? false : true}
+          invalid={data.SelfID ? false : true}
         />
         <CFormFeedback
           invalid
@@ -66,7 +66,7 @@ export const DataEntryForms = (props)=>{
         </CFormLabel>
         <CFormInput
           name="name"
-          value={data.name}
+          value={data.Name}
           style={{ width: 300, marginRight: 15 }}
           margin="dense"
           variant="outlined"
@@ -77,7 +77,7 @@ export const DataEntryForms = (props)=>{
             }
             const patt = /[^a-zA-Z ]/g;
             const Name1 = str.join(' ').replace(patt, '');
-            props.setData({ ...data, name: Name1 })
+            props.setData({ ...data, Name: Name1 })
           }}
           placeholder="Enter Name"
           label="Enter Name"
@@ -97,11 +97,11 @@ export const DataEntryForms = (props)=>{
         <CFormInput
           type={'date'}
           style={{ width: 300, marginRight: 15 }}
-          value={data.dob}
-          onChange={(event) => props.setData({ ...data, dob: event.target.value })}
+          value={data.DOB}
+          onChange={(event) => props.setData({ ...data, DOB: event.target.value })}
           label="Enter DOB"
           required
-          invalid={data.dob ? false : true}
+          invalid={data.DOB ? false : true}
         />
         <CFormFeedback
           invalid
@@ -115,6 +115,7 @@ export const DataEntryForms = (props)=>{
         </CFormLabel>
         <RadioGroup
           row
+          value={data.Gender}
           aria-label="gender"
           name="row-radio-buttons-group"
           style={{
@@ -127,14 +128,14 @@ export const DataEntryForms = (props)=>{
             name="gender"
             label={'Male'}
             control={<Radio />}
-            onChange={(event) => props.setData({ ...data, gender: event.target.value })}
+            onChange={(event) => props.setData({ ...data, Gender: event.target.value })}
           />
           <FormControlLabel
             value="female"
             name="gender"
             label={'Female'}
             control={<Radio />}
-            onChange={(event) => props.setData({ ...data, gender: event.target.value })}
+            onChange={(event) => props.setData({ ...data, Gender: event.target.value })}
           />
         </RadioGroup>
       </CCol>
@@ -146,6 +147,7 @@ export const DataEntryForms = (props)=>{
           row
           aria-label="martial-status"
           name="row-radio-buttons-group"
+          value={data.Married==1||data.Married==true?true:false}
           style={{
             width: 300,
             justifyContent: 'space-evenly',
@@ -156,7 +158,7 @@ export const DataEntryForms = (props)=>{
             label={'Married'}
             control={<Radio />}
             onChange={(event) => {
-              props.setData({ ...data, married: event.target.value == 'true' ? true : false })
+              props.setData({ ...data, Married: event.target.value == 'true' ? true : false })
             }}
           />
           <FormControlLabel
@@ -164,14 +166,14 @@ export const DataEntryForms = (props)=>{
             control={<Radio />}
             label={'Unmarried'}
             onChange={(event) => {
-              props.setData({ ...data, married: event.target.value == 'true' ? true : false })
+              props.setData({ ...data, Married: event.target.value == 'true' ? true : false })
             }}
           />
         </RadioGroup>
       </CCol>
       <CCol md={4}
         style={{
-          display: data.married === true ? 'block' : 'none',
+          display: data.Married == true || data.Married==1? 'block' : 'none',
           width: 300,
           marginRight: 15,
         }}
@@ -184,8 +186,8 @@ export const DataEntryForms = (props)=>{
           label="Wedding Date"
           margin="dense"
           variant="outlined"
-          value={data.weddingdate}
-          onChange={(event) => props.setData({ ...data, weddingdate:event.target.value })}
+          value={data.WeddingDate}
+          onChange={(event) => props.setData({ ...data, WeddingDate:event.target.value })}
         />
       </CCol>
 
@@ -200,9 +202,9 @@ export const DataEntryForms = (props)=>{
           label="Email ID"
           style={{ width: 300, marginRight: 15 }}
           variant="outlined"
-          onChange={(event) => props.setData({ ...data, emailid: event.target.value })}
-          value={data.emailid}
-          invalid={(!data.emailid || (data.emailid.includes('@') && data.emailid.includes('.com'))) ? false : true}
+          onChange={(event) => props.setData({ ...data, EmailID: event.target.value })}
+          value={data.EmailID}
+          invalid={(!data.EmailID || (data.EmailID.includes('@') && data.EmailID.includes('.com'))) ? false : true}
         />
         <CFormFeedback
           invalid
@@ -221,14 +223,14 @@ export const DataEntryForms = (props)=>{
           placeholder='Enter mobile number'
           margin="dense"
           variant="outlined"
-          value={data.mobile}
+          value={data.Mobile}
           onChange={(event) => {
             let patt = /[^0-9]/g
             const ph = event.target.value.replace(patt, '')
-            props.setData({ ...data, mobile: ph.slice(0, 10) })
+            props.setData({ ...data, Mobile: ph.slice(0, 10) })
           }}
           required
-          invalid={(data.mobile.length === 10) ? false : true}
+          invalid={(data.Mobile.length === 10) ? false : true}
         />
         <CFormFeedback invalid>
           Enter valid number
@@ -248,17 +250,17 @@ export const DataEntryForms = (props)=>{
           style={{ width: 300, marginRight: 15 }}
           margin="dense"
           variant="outlined"
-          value={data.address}
+          value={data.Address}
           onChange={(event) => {
             const str = event.target.value.split(',')
             for (let i = 0; i < str.length; i++) {
               str[i] = str[i].charAt(0).toUpperCase() + str[i].substring(1)
             }
             const address = str.join(',')
-            props.setData({ ...data, address: address })
+            props.setData({ ...data, Address: address })
           }}
           required
-          invalid={data.address ? false : true}
+          invalid={data.Address ? false : true}
         />
         <CFormFeedback
           invalid
@@ -272,7 +274,7 @@ export const DataEntryForms = (props)=>{
         </CFormLabel>
         <CFormInput
           name="familyhead"
-          value={data.familyhead}
+          value={data.FamilyHead}
           margin="dense"
           placeholder='Enter family head'
           variant="outlined"
@@ -283,10 +285,10 @@ export const DataEntryForms = (props)=>{
               str[i] = str[i].charAt(0).toUpperCase() + str[i].substring(1)
             }
             const familyheadname = str.join(' ')
-            props.setData({ ...data, familyhead: familyheadname })
+            props.setData({ ...data, FamilyHead: familyheadname })
           }}
           required
-          invalid={data.familyhead ? false : true}
+          invalid={data.FamilyHead ? false : true}
           list='listforfamilyheads'
         />
         <datalist id='listforfamilyheads'>
@@ -307,6 +309,7 @@ export const DataEntryForms = (props)=>{
         <RadioGroup
           row
           aria-label="Baptizm"
+          value={data.Baptized==true||data.Baptized==1?true:false}
           name="row-radio-buttons-group"
           style={{
             width: 300,
@@ -318,7 +321,7 @@ export const DataEntryForms = (props)=>{
             value={true}
             label={'Baptized'}
             onChange={(event) =>
-              props.setData({ ...data, baptized: event.target.value == 'true' ? true : false })
+              props.setData({ ...data, Baptized: event.target.value == 'true' ? true : false })
             }
           />
           <FormControlLabel
@@ -326,7 +329,7 @@ export const DataEntryForms = (props)=>{
             control={<Radio />}
             label={'Not Baptized'}
             onChange={(event) =>
-              props.setData({ ...data, baptized: event.target.value == 'true' ? true : false })
+              props.setData({ ...data, Baptized: event.target.value == 'true' ? true : false })
             }
           />
         </RadioGroup>
@@ -337,6 +340,7 @@ export const DataEntryForms = (props)=>{
         </CFormLabel>
         <RadioGroup
           row
+          value={data.Android==1||data.Android==true?true:false}
           aria-label="mobile-type"
           name="row-radio-buttons-group"
           style={{
@@ -349,7 +353,7 @@ export const DataEntryForms = (props)=>{
             value={true}
             control={<Radio />}
             onChange={(event) =>
-              props.setData({ ...data, android: event.target.value == 'true' ? true : false })
+              props.setData({ ...data, Android: event.target.value == 'true' ? true : false })
             }
           />
           <FormControlLabel
@@ -357,7 +361,7 @@ export const DataEntryForms = (props)=>{
             value={false}
             control={<Radio />}
             onChange={(event) =>
-              props.setData({ ...data, android: event.target.value == 'true' ? true : false })
+              props.setData({ ...data, Android: event.target.value == 'true' ? true : false })
             }
           />
         </RadioGroup>

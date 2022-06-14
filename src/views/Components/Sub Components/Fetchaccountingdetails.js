@@ -70,20 +70,16 @@ const Fetchaccountingdetails = () => {
       })
         .then(res => res.json())
         .then((result) => {
-          if (result !== "No matches found on Record") {
-            setNotify({
-              ...notify,
-              message:result
-            })
-            console.log(result,"RES")
-            // setsearchbynameobj(result);
-            // setdisplay1("block");
+          if (result['status'] != 0) {
+
+            setsearchbynameobj(result['message']);
+            setdisplay1("block");
 
           } else {
             setdisplay1("none");
             setNotify({
               isOpen: true,
-              message: result,
+              message: result['message'],
               variant: "filled",
               severity: "error"
             })
@@ -124,8 +120,8 @@ const Fetchaccountingdetails = () => {
       })
         .then(res => res.json())
         .then((result) => {
-          if (result !== "No matches found on Record") {
-            setsearchbydateobj(result);
+          if (result['status'] !== 0) {
+            setsearchbydateobj(result['message']);
             setdisplay2("block");
             result.map((l) => {
               setnamearray(cp => [...cp, l.Name]);
@@ -133,13 +129,13 @@ const Fetchaccountingdetails = () => {
 
           } else {
             setdisplay2("none");
-            return (
-              setNotify({
-                ...notify,
-                isOpen: true,
-                message: result
-              })
-            )
+
+            setNotify({
+              ...notify,
+              isOpen: true,
+              message: result['message']
+            })
+
 
           }
         }).catch((error) => {
@@ -195,14 +191,14 @@ const Fetchaccountingdetails = () => {
       })
         .then(res => res.json())
         .then((result) => {
-          if (result !== "No matches found on Record") {
-            setsobjoftotals(result);
+          if (result['status'] !== 0) {
+            setsobjoftotals(result['message']);
             setdisplay3("block");
 
           } else {
             setNotify({
               isOpen: true,
-              message: result,
+              message: result['message'],
               variant: "filled",
               severity: "error"
             })
@@ -465,7 +461,7 @@ const Fetchaccountingdetails = () => {
                       <CTableRow>
                         <CTableDataCell>{k.Name}</CTableDataCell>
                         <CTableDataCell>{k.Amount}</CTableDataCell>
-                        <CTableDataCell>{k.Date}</CTableDataCell>
+                        <CTableDataCell>{new Date(k.Date).toLocaleDateString()}</CTableDataCell>
                         <CTableDataCell>{k.Type}</CTableDataCell>
                       </CTableRow>
                     )
@@ -476,7 +472,8 @@ const Fetchaccountingdetails = () => {
                       <CTableRow>
                         <CTableDataCell>{k.Name}</CTableDataCell>
                         <CTableDataCell>{k.Amount}</CTableDataCell>
-                        <CTableDataCell>{k.Date}</CTableDataCell>
+                        <CTableDataCell>{new Date(k.Date).toLocaleDateString()}</CTableDataCell>
+                        <CTableDataCell>{k.Type}</CTableDataCell>
                       </CTableRow>
                     )
                   }
@@ -490,7 +487,7 @@ const Fetchaccountingdetails = () => {
                 })}
               </CTableBody>
             </CTable>
-            <Typography>
+            <Typography >
               Tithe Total from {new Date(fromdate ? fromdate : '').toLocaleDateString()} to {new Date(todate ? todate : '').toLocaleDateString()}: {titheTotal}
             </Typography>
             <Typography>
@@ -552,7 +549,7 @@ const Fetchaccountingdetails = () => {
               if (k.ChurchOffering !== "0") {
                 flag = 1;
                 return (
-                  <Typography>Church Offering on {k.Date} : Rs.{k.ChurchOffering} </Typography>
+                  <Typography>Church Offering on {new Date(k.Date).toLocaleDateString()} : Rs.{k.ChurchOffering} </Typography>
                 )
               } else {
                 return (
@@ -628,7 +625,7 @@ const Fetchaccountingdetails = () => {
                         <CTableDataCell>{k.Five}</CTableDataCell>
                         <CTableDataCell>{k.Two}</CTableDataCell>
                         <CTableDataCell>{k.One}</CTableDataCell>
-                        <CTableDataCell>{k.Date}</CTableDataCell>
+                        <CTableDataCell>{new Date(k.Date).toLocaleDateString()}</CTableDataCell>
                       </CTableRow>
                     )
                   }
