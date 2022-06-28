@@ -1,7 +1,4 @@
-import { Grid, Typography } from "@mui/material";
-import React from "react";
-import {BrowserRouter as Router, Link } from 'react-router-dom';
-import '../assets/Home.css';
+import { Grid } from "@mui/material";
 
 const Home = () =>{
    

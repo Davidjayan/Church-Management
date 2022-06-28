@@ -7,6 +7,7 @@ import {
   cilPen,
   cilPeople,
   cilVideo,
+  cilPencil
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -16,6 +17,12 @@ const _nav = [
     name: 'Youtube',
     to: '/youtubeid',
     icon: <CIcon icon={cilVideo} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Verse',
+    to: '/verse-handler',
+    icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   },
   {
     component: CNavGroup,

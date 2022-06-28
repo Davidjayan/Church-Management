@@ -11,6 +11,7 @@ const GetStudentAttendance = React.lazy(()=> import('./views/Components/Sub Comp
 const InsertForm = React.lazy(()=> import('./views/Components/Dataentry')) 
 const EditForm = React.lazy(()=> import('./views/Components/EditData'))  
 const YoutubeID = React.lazy(()=>import('./views/Components/YoutubeID'))
+const Verse = React.lazy(()=>import('./views/Components/Verse'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -25,6 +26,7 @@ const routes = [
   { path: '/form-insert', name: 'Member Form', component: InsertForm },
   { path: '/form-edit', name: 'Member Details', component: EditForm },
   { path: '/youtubeid', name: 'Youtube', component: YoutubeID },
+  { path: '/verse-handler', name: 'Verse', component: Verse },
 ]
 
 export default routes
