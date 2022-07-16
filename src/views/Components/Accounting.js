@@ -204,6 +204,11 @@ const Accounting = (props) => {
   }, [])
 
 
+  useEffect(()=>{
+    console.log("-------------");
+console.log(people,"PEOPLE");
+  },[people])
+
 
   return (
     <Grid>
@@ -222,6 +227,7 @@ const Accounting = (props) => {
             size="small"
           >
             {people.map((p,index) => {
+              let name = '';
               return (
                 <Grid key={p.id}>
                   <TableRow>
@@ -232,13 +238,31 @@ const Accounting = (props) => {
                         style={{ width: 200 }}
                         onChange={(val,event) => {
                           let str = event;
-                          setPeople(...[people],people[index].Name = str);
-                          console.log(p.Name);
+                            name = str;
+                            setPeople(...[people],people[index].Name = str);
+                          
+                          
                         }}
+
+                        onInputChange={(event, newInputValue) => {
+                          if(p.Name=='' || newInputValue.includes(p.Name)){
+                            setPeople(...[people],people[index].Name = newInputValue);
+                            console.log(people[index]);
+
+                          }
+                        }}
+
+                        value={p.Name}
+
                         renderInput={params =>
                           <TextField
                             {...params}
                             margin="dense"
+                            onChange={(e)=>{
+                            setPeople(...[people],people[index].Name = e.target.value);
+                              console.log(e.target.value);
+
+                            }}
                             ref={params.InputProps.ref}
                             size="small"
                             placeholder="Enter Name"
