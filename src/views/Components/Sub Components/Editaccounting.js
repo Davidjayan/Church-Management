@@ -418,8 +418,6 @@ const Editaccounting = (props) => {
                                                 ...x,
                                                 Type
                                             } : x));
-                                            console.log(JSON.stringify(report), "VAL")
-                                            console.log(JSON.stringify(denominationsAndTotals), "VAL1")
 
                                         }} >
                                         {arrOfferingTypes.map((val, key) => {

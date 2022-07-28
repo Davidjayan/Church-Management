@@ -69,7 +69,6 @@ const EditData = () => {
                     for (let i = 0; i < mess.length; i++) {
                        mess[i].InitialSID = mess[i]['SelfID'];                        
                     }
-                    console.log(mess);
                     setdata(mess);
                 }
                 else {
@@ -273,7 +272,6 @@ const EditData = () => {
                     validated={validated}
                     handleSubmit={handleSubmit}
                 />
-                // console.log(editdata)
                 : ''
 
             }

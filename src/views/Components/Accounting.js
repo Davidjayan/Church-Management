@@ -9,7 +9,7 @@ import { Datepicker } from "./Support/Datepicker";
 
 
 const Accounting = (props) => {
-  const {setLoading} = props;
+  const { setLoading } = props;
   const [people, setPeople] = useState([{ id: 1, Name: '', type: '', Amount: '' }]);
   const [count, setCount] = useState(2);
   const [names, setnames] = useState([]);
@@ -159,7 +159,7 @@ const Accounting = (props) => {
           setNotify({
             isOpen: true,
             message: result['message'],
-            severity:result['status']==1?'success':'error',
+            severity: result['status'] == 1 ? 'success' : 'error',
             variant: 'filled'
           })
 
@@ -203,11 +203,12 @@ const Accounting = (props) => {
     searchapi();
   }, [])
 
+  const [currentIndex,setcurrentIndex] = useState(0);
+  const [currentString,setCurrentString] = useState('');
 
-  useEffect(()=>{
-    console.log("-------------");
-console.log(people,"PEOPLE");
-  },[people])
+  useEffect((index,str)=>{
+    setPeople(...[people], people[currentIndex].Name = currentString);
+  },[currentIndex]);
 
 
   return (
@@ -226,8 +227,9 @@ console.log(people,"PEOPLE");
           <Table
             size="small"
           >
-            {people.map((p,index) => {
+            {people.map((p, index) => {
               let name = '';
+              let flag = 0;
               return (
                 <Grid key={p.id}>
                   <TableRow>
@@ -236,40 +238,45 @@ console.log(people,"PEOPLE");
                         options={names}
                         fullWidth={false}
                         style={{ width: 200 }}
-                        onChange={(val,event) => {
+                        onChange={(val, event) => {
                           let str = event;
-                            name = str;
-                            setPeople(...[people],people[index].Name = str);
-                          
-                          
+                          name = str;
+                          flag = 0;
+                          setPeople(...[people], people[index].Name = str);
+                          if (event) {
+                            setcurrentIndex(index);
+                            setCurrentString(str);
+                            flag = 1;
+                            name = event;
+                          }
                         }}
 
-                        onInputChange={(event, newInputValue) => {
-                          if(p.Name=='' || newInputValue.includes(p.Name)){
-                            setPeople(...[people],people[index].Name = newInputValue);
-                            console.log(people[index]);
+
+                        onBlur={(e) => {
+                          if (name == '' || flag == 0) {
+                            flag = 1;
+                            setcurrentIndex(index);
+                            setCurrentString(e.target.value);
+                            setnames([...names, e.target.value]);
 
                           }
                         }}
 
+                        
                         value={p.Name}
 
                         renderInput={params =>
                           <TextField
                             {...params}
                             margin="dense"
-                            onChange={(e)=>{
-                            setPeople(...[people],people[index].Name = e.target.value);
-                              console.log(e.target.value);
-
-                            }}
-                            ref={params.InputProps.ref}
+                            
+                            // ref={params.InputProps.ref}
                             size="small"
                             placeholder="Enter Name"
                             value={p.Name}
                           />
                         }
-                        
+
                       />
                     </TableCell>
                     <TableCell>
@@ -389,8 +396,8 @@ console.log(people,"PEOPLE");
                   <TableRow
                     key={key}
                     direction={"row"}
-                    justifyItems={"center"}
-                    alignItems={"center"}
+                    justifyitems={"center"}
+                    alignitems={"center"}
                   >
                     <TableCell>
                       <Typography

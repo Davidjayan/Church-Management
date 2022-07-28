@@ -34,7 +34,6 @@ const Dataentry = () => {
     setAge(String(parseInt((new Date().getTime() - new Date(data.DOB).getTime()) / yearDifference).toString().replace("-", "")));
 
 
-    console.log(age);
   }, [data.DOB])
 
 
