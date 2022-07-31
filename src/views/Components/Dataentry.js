@@ -4,7 +4,8 @@ import { url } from '../Constants'
 import { DataEntryForms } from './DataEntryForm'
 
 
-const Dataentry = () => {
+const Dataentry = (props) => {
+  const {setLoading} = props;
   const [familyheads, setFamilyheads] = useState([]);
   const [notify, setNotify] = useState({ isOpen: false, message: '', variant: 'filled', severity: 'error' });
   const [validity, setValidity] = useState(true);
@@ -59,7 +60,7 @@ const Dataentry = () => {
 
   const addrecords = () => {
     if (validated) {
-
+      setLoading(true);
       fetch(`${url}/member_details.php`, {
         method: 'POST',
         headers: {
@@ -85,6 +86,7 @@ const Dataentry = () => {
       })
         .then((res) => res.json())
         .then((result) => {
+          setLoading(false);
           setNotify({
             ...notify,
             isOpen: true,
@@ -126,6 +128,7 @@ const Dataentry = () => {
   }, [validated])
 
   const searchfamilyhead = () => {
+    setLoading(true);
     fetch(`${url}/searchfamilyhead.php`, {
       method: 'POST',
       headers: {
@@ -135,6 +138,7 @@ const Dataentry = () => {
     })
       .then((res) => res.json())
       .then((result) => {
+        setLoading(false);
         let filteredresult = [...new Set(result)]
         setFamilyheads(filteredresult)
       })

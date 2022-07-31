@@ -5,7 +5,7 @@ import { CAlert, CFormSelect, CFormText, CTable, CTableBody, CTableDataCell, CTa
 import { AlertMessage } from './Support/AlertMessage';
 import { DataEntryForms } from './DataEntryForm';
 
-const EditData = () => {
+const EditData = (props) => {
     const [data, setdata] = useState([]);
     const [pageno, setPageno] = useState(0);
     const [pages, setPages] = useState([]);
@@ -13,6 +13,7 @@ const EditData = () => {
     const items = 10;
     const [familyheads, setFamilyheads] = useState([]);
     const [addresses, setAddresses] = useState([]);
+    const { setLoading } = props;
 
 
 
@@ -33,6 +34,7 @@ const EditData = () => {
     }
 
     useEffect(() => {
+        setLoading(true);
         fetch(`${url}/member-data-count.php`, {
             method: 'GET',
             headers: {
@@ -42,6 +44,7 @@ const EditData = () => {
         })
             .then((res) => res.json())
             .then((result) => {
+                setLoading(false);
                 if (result['status'] == 1) {
                     let pagecount = parseInt(parseInt(result['message']) / items);
                     let pageList = [];
@@ -55,6 +58,7 @@ const EditData = () => {
     }, [])
 
     useEffect(() => {
+        setLoading(true);
         fetch(`${url}/data-fetch.php?page_no=${pageno}&items=${items}`, {
             method: 'GET',
             headers: {
@@ -64,6 +68,7 @@ const EditData = () => {
 
         }).then((res) => res.json())
             .then((result) => {
+                setLoading(false);
                 if (result['status'] == 1) {
                     let mess = result['message'];
                     for (let i = 0; i < mess.length; i++) {
@@ -94,6 +99,7 @@ const EditData = () => {
 
 
     const searchfamilyhead = () => {
+        setLoading(true);
         fetch(`${url}/searchfamilyhead.php`, {
             headers: {
                 'Accept': 'application/json',
@@ -103,6 +109,7 @@ const EditData = () => {
         })
             .then(res => res.json())
             .then((result) => {
+                setLoading(false);
                 let filteredresult = [...new Set(result)];
                 setFamilyheads(filteredresult);
             }).catch((error) => {
@@ -110,6 +117,7 @@ const EditData = () => {
             });
     }
     const searchaddress = () => {
+        setLoading(true);
         fetch(`${url}/searchaddress.php`, {
             method: 'POST',
             headers: {
@@ -120,6 +128,7 @@ const EditData = () => {
         })
             .then(res => res.json())
             .then((result) => {
+                setLoading(false);
                 let filteredresult = [...new Set(result)];
                 setAddresses(filteredresult);
             }).catch((error) => {
@@ -130,6 +139,7 @@ const EditData = () => {
 
     const makechanges = () => {
         if(editdata!==undefined){
+            setLoading(true);
             fetch(`${url}/data-edit.php`, {
                 method: 'POST',
                 headers: {
@@ -142,6 +152,7 @@ const EditData = () => {
     
             }).then((res) => res.json())
                 .then((result) => {
+                    setLoading(false);
                     setNotify({
                         ...notify,
                         isOpen: true,
@@ -157,7 +168,7 @@ const EditData = () => {
     }
     const deleteRecord = () => {
 
-
+        setLoading(true);
         fetch(`${url}/data-delete.php`, {
             method: 'POST',
             headers: {
@@ -170,6 +181,7 @@ const EditData = () => {
 
         }).then((res) => res.json())
             .then((result) => {
+                setLoading(false);
                 setNotify({
                     ...notify,
                     isOpen: true,

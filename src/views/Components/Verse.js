@@ -4,8 +4,8 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { url } from "../Constants";
 import { AlertMessage } from "./Support/AlertMessage";
 
-const Verse = () => {
-
+const Verse = (props) => {
+    const {setLoading} = props;
     const [notify, setNotify] = useState({ isOpen: false, message: '', variant: 'filled', severity: 'error' });
     const Books = [
 
@@ -87,6 +87,7 @@ const Verse = () => {
 
 
     const submit =()=>{
+        setLoading(true);
         fetch(`${url}/insertverse.php`,{
             method: 'POST',
             headers: {
@@ -99,7 +100,7 @@ const Verse = () => {
             })
         }).then(res => res.json())
         .then((result) => {
-        //   setLoading(false);
+          setLoading(false);
           setNotify({
             isOpen: true,
             message: result['message'],

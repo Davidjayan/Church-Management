@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { url } from '../../Constants';
 import { AlertMessage } from '../Support/AlertMessage';
 
-const Getchurchattendance = () => {
+const Getchurchattendance = (props) => {
+    const {setLoading} = props;
     const [firstField, setfirstField] = useState();
     const [display1, setdisplay1] = useState("none");
     const [display2, setdisplay2] = useState("none");
@@ -66,6 +67,7 @@ const Getchurchattendance = () => {
 
     const submit1 = () => {
         if (date.length !== 0) {
+            setLoading(true);
             fetch(`${url}/searchchurchattbydate.php`, {
                 method: 'POST',
                 headers: {
@@ -80,6 +82,7 @@ const Getchurchattendance = () => {
             })
                 .then(res => res.json())
                 .then((result) => {
+                    setLoading(false);
                     if (result !== "No matches found on Record") {
                         setobj1(result);
 
@@ -112,6 +115,7 @@ const Getchurchattendance = () => {
 
     const submit = () => {
         if (fromdate && todate && name) {
+            setLoading(true);
             fetch(`${url}/searchchurchattbyname.php`, {
                 method: 'POST',
                 headers: {
@@ -128,6 +132,7 @@ const Getchurchattendance = () => {
             })
                 .then(res => res.json())
                 .then((result) => {
+                    setLoading(false);
                     if (result !== "No matches found on Record") {
                         setobj(result);
                         setdisplay3("block");
@@ -160,6 +165,7 @@ const Getchurchattendance = () => {
 
 
     const searchapi = () => {
+        setLoading(true);
         fetch(`${url}/searchname.php`, {
             method: 'POST',
             headers: {
@@ -170,6 +176,7 @@ const Getchurchattendance = () => {
         })
             .then(res => res.json())
             .then((result) => {
+                setLoading(false);
                 setnamelist(result);
             }).catch((error) => {
                 console.error(error);

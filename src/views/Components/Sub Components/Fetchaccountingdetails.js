@@ -18,7 +18,8 @@ import { toDate } from 'date-fns';
 
 
 
-const Fetchaccountingdetails = () => {
+const Fetchaccountingdetails = (props) => {
+  const {setLoading} = props;
   const [notify, setNotify] = useState({ isOpen: false, message: '', variant: 'filled', severity: 'error' });
   const [offeringtype, setofferingtype] = useState();
   const [fromdate, setfromdate] = useState();
@@ -54,6 +55,7 @@ const Fetchaccountingdetails = () => {
 
   const submitbyname = () => {
     if (fromdate !== undefined && todate !== undefined) {
+      setLoading(true);
       fetch(`${url}/accounting-submitbyname.php`, {
         method: 'POST',
         headers: {
@@ -70,6 +72,7 @@ const Fetchaccountingdetails = () => {
       })
         .then(res => res.json())
         .then((result) => {
+          setLoading(false);
           if (result['status'] != 0) {
 
             setsearchbynameobj(result['message']);
@@ -105,6 +108,7 @@ const Fetchaccountingdetails = () => {
 
   const submitbydate = () => {
     if (fromdate !== undefined && todate !== undefined) {
+      setLoading(true);
       fetch(`${url}/accounting-submitbydate.php`, {
         method: 'POST',
         headers: {
@@ -120,6 +124,7 @@ const Fetchaccountingdetails = () => {
       })
         .then(res => res.json())
         .then((result) => {
+          setLoading(false);
           if (result['status'] !== 0) {
             setsearchbydateobj(result['message']);
             setdisplay2("block");
@@ -155,6 +160,7 @@ const Fetchaccountingdetails = () => {
   }
 
   const searchapi = () => {
+    setLoading(true);
     fetch(`${url}/searchname.php`, {
       method: 'POST',
       headers: {
@@ -165,6 +171,7 @@ const Fetchaccountingdetails = () => {
     })
       .then(res => res.json())
       .then((result) => {
+        setLoading(false);
         setnamelist(result);
       }).catch((error) => {
         console.error(error);
@@ -176,6 +183,7 @@ const Fetchaccountingdetails = () => {
 
   const submitbydateglobal = () => {
     if (fromdate !== undefined && todate !== undefined) {
+      setLoading(true);
       fetch(`${url}/accounting-submitchurchofferings-totals.php`, {
         method: 'POST',
         headers: {
@@ -192,6 +200,7 @@ const Fetchaccountingdetails = () => {
       })
         .then(res => res.json())
         .then((result) => {
+          setLoading(false);
           if (result['status'] !== 0) {
             setsobjoftotals(result['message']);
             setdisplay3("block");

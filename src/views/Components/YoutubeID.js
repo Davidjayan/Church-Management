@@ -5,14 +5,16 @@ import { url } from '../Constants';
 import { AlertMessage } from './Support/AlertMessage';
 
 
-const YoutubeID = () => {
-    const [links, setlinks] = useState([{ sno: 1, id: '' }]);
+const YoutubeID = (props) => {
+    const {setLoading} = props;
+     const [links, setlinks] = useState([{ sno: 1, id: '' }]);
     const [count, setcount] = useState(2);
     const [notify, setNotify] = useState({ isOpen: false, message: '', variant: 'filled', severity: 'error' });
 
     let id = links.map((k) => k.id);
 
     const submit = () => {
+        setLoading(true);
         fetch(`${url}/youtubeid.php`, {
             method: 'POST',
             headers: {
@@ -27,6 +29,7 @@ const YoutubeID = () => {
         })
             .then(res => res.json())
             .then((result) => {
+                setLoading(false);
                 setNotify({
                     ...notify,
                     isOpen:true,
