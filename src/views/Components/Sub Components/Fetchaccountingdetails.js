@@ -123,7 +123,8 @@ const Fetchaccountingdetails = () => {
           if (result['status'] !== 0) {
             setsearchbydateobj(result['message']);
             setdisplay2("block");
-            result.map((l) => {
+
+            result['message'].map((l) => {
               setnamearray(cp => [...cp, l.Name]);
             })
 
@@ -404,8 +405,7 @@ const Fetchaccountingdetails = () => {
             <Typography
               fontStyle={'italic'}
               fontWeight={900}
-            >{offeringtype} Total of {name}
-              from {new Date(fromdate ? fromdate : '').toLocaleDateString()} to {new Date(todate ? todate : '').toLocaleDateString()}
+            >{offeringtype} Total of {name} from {new Date(fromdate ? fromdate : '').toLocaleDateString()} to {new Date(todate ? todate : '').toLocaleDateString()}
               : {offeringtype === "Tithe" ? titheTotalofp : offeringtype === "Offering" ? offeringTotalofp : offeringtype === "Missionary" ? missionaryTotalofp : offeringtype === "Special Offering" ? specialofferingTotalofp : offeringtype === "Baptism Offering" ? baptismofferingTotalofp : offeringtype === "Birthday Offering" ? birthdayofferingTotalofp : offeringtype === "Wedding Offering" ? weddingofferingTotalofp : offeringtype === "Child Dedication Offering" ? childdedicationofferingTotalofp : offeringtype === "Committed Offering" ? committedofferingTotalofp : offeringtype === "Building Fund" ? buildingfundTotalofp : 0}
             </Typography>
           </Grid>
