@@ -239,7 +239,7 @@ const Dashboard = () => {
                   pointHoverBackgroundColor: getStyle('--cui-success'),
                   borderWidth: 2,
                   data: [
-                    random(50, 200),
+                    random(50, 150),
                     random(50, 200),
                     random(50, 200),
                     random(50, 200),
@@ -255,7 +255,7 @@ const Dashboard = () => {
                   pointHoverBackgroundColor: getStyle('--cui-danger'),
                   borderWidth: 1,
                   borderDash: [8, 5],
-                  data: [65, 65, 65, 65, 65, 65, 65],
+                  data: [65, 65, 65, 65, 65, 65, 9],
                 },
               ],
             }}
