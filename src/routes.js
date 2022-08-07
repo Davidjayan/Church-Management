@@ -11,6 +11,8 @@ const GetStudentAttendance = React.lazy(()=> import('./views/Components/Sub Comp
 const InsertForm = React.lazy(()=> import('./views/Components/Dataentry')) 
 const EditForm = React.lazy(()=> import('./views/Components/EditData'))  
 const YoutubeID = React.lazy(()=>import('./views/Components/YoutubeID'))
+const FileUpload = React.lazy(()=>import('./views/Components/Fileupload'))
+const Events = React.lazy(()=>import('./views/Components/Event'))
 const Verse = React.lazy(()=>import('./views/Components/Verse'))
 
 const routes = [
@@ -25,6 +27,8 @@ const routes = [
   { path: '/attendance-student-get', name: 'Student Attendance', component: GetStudentAttendance },
   { path: '/form-insert', name: 'Member Form', component: InsertForm },
   { path: '/form-edit', name: 'Member Details', component: EditForm },
+  { path: '/image-upload', name: 'Files', component: FileUpload },
+  { path: '/events', name: 'Event', component: Events },
   { path: '/youtubeid', name: 'Youtube', component: YoutubeID },
   { path: '/verse-handler', name: 'Verse', component: Verse },
 ]

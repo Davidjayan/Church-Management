@@ -106,6 +106,23 @@ const _nav = [
       },
     ],
   },
+  {
+    component: CNavGroup,
+    name: 'Portfolio management',
+    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Files',
+        to: '/image-upload',
+      },
+      {
+        component: CNavItem,
+        name: 'Event',
+        to: '/events',
+      },
+    ],
+  },
 ]
 
 export default _nav
